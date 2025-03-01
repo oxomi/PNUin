@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="/main.css">
+  </head>
+  <body class="{{ 'dark-mode' if darkMode else '' }}">
+    <div class="banner">
+      <img src="/logo/img.png" class="logo" alt="로고">
+      <button id="toggle-dark-mode" class="btn toggle-btn">
+        {% if darkMode %}
+        라이트모드
+        {% else %}
+        다크모드
+        {% endif %}
+      </button>
+
+    </div>
+
+    <div class="container">
+      <!-- 프로필 영역 -->
+      <div class="profile-wrap">
+        <div class="profile">
+          {% if user and user.id %}
+            <div class="user-name">{{'안녕하세요! ' + user.nick + '님'}}</div>
+          <div class="half">
+            <div>질문 수: {{ user.questionCount }}</div>
+          </div>
+          <div class="half">
+            <div>답변 수: {{ user.answerCount }}</div>
+          </div>
+          <input id="my-id" type="hidden" value="{{user.id}}">
+          <a id="my-profile" href="/profile" class="btn">내 프로필</a>
+          <a id="logout" href="/auth/logout" class="btn">로그아웃</a>
+        {% else %}
+          <form id="login-form" action="/auth/login" method="post">
+            <div class="input-group">
+              <label for="email">이메일</label>
+              <input id="email" type="email" name="email" required autofocus>
+            </div>
+            <div class="input-group">
+              <label for="password">비밀번호</label>
+              <input id="password" type="password" name="password" required>
+            </div>
+            <a id="join" href="/join" class="btn">회원가입</a>
+            <button id="login" type="submit" class="btn">로그인</button>
+
+          </form>
+        {% endif %}
+        </div>
+      </div>
+      {% block content %}
+      {% endblock %}
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      // 다크모드 버튼 클릭 이벤트
+      document.getElementById("toggle-dark-mode").addEventListener("click", () => {
+        const isDarkMode = document.body.classList.toggle("dark-mode"); // 다크모드 토글
+        document.cookie = `darkMode=${isDarkMode}; path=/;`; // 쿠키에 다크모드 상태 저장
+        location.reload(); // 페이지 새로고침으로 즉시 반영
+      });
+
+      window.onload = () => {
+        if (new URL(location.href).searchParams.get('error')) {
+          alert(new URL(location.href).searchParams.get('error'));
+        }
+      };
+    </script>
+    {% block script %}
+    {% endblock %}
+  </body>
+  <footer>
+    @2024 웹응용프로그래밍 텀프로젝트 Made By 옥소미
+  </footer>
+</html>

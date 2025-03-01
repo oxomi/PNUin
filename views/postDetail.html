@@ -1,0 +1,81 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="post-container">
+    <h2 class="post-title">Q. {{ post.title }}</h2>
+
+  <p><strong>작성자:</strong> {{ post.userNick }}</p>
+  <p><strong>내용:</strong> {{ post.content }}</p>
+
+  {% if post.img %}
+  <div class="post-img">
+    <img src="{{ post.img }}" alt="게시글 이미지">
+  </div>
+  {% endif %}
+
+
+  <!-- 답글 작성 폼 -->
+  <form action="/post/{{ post.id }}/reply" method="POST" class="reply-form">
+    <div class="reply-input">
+      <textarea name="content" placeholder="답글을 작성하세요" required></textarea>
+    </div>
+    <button type="submit" class="btn reply-btn">답글 작성</button>
+  </form>
+
+  <!-- 답글 목록 -->
+  <div class="replies">
+    {% for reply in replies %}
+    <div class="reply">
+      <p class="reply-content"><strong>{{ reply.userNick }}:</strong> {{ reply.content }}</p>
+      {% if reply.userId === user.id %}
+      <button class="btn remove-reply" data-reply-id="{{ reply.id }}">답글 삭제</button>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+  if (document.getElementById('img')) {
+    document.getElementById('img').addEventListener('change', function(e) {
+      const formData = new FormData();
+      console.log(this, this.files);
+      formData.append('img', this.files[0]);
+      axios.post('/post/img', formData)
+              .then((res) => {
+                document.getElementById('img-url').value = res.data.url;
+                document.getElementById('img-preview').src = res.data.url;
+                document.getElementById('img-preview').style.display = 'inline';
+              })
+              .catch((err) => {
+                console.error(err);
+              });
+    });
+  }
+
+  // 답글 삭제 이벤트
+  document.querySelector('.replies').addEventListener('click', function (event) {
+    if (event.target && event.target.classList.contains('remove-reply')) {
+      const replyId = event.target.getAttribute('data-reply-id'); // 답글 ID 가져오기
+      const postId = window.location.pathname.split('/')[2]; // 현재 페이지의 게시글 ID 가져오기
+
+      if (confirm('정말로 답글을 삭제하시겠습니까?')) {
+        axios.delete(`/post/${postId}/reply`, { data: { replyId } }) // DELETE 요청
+                .then(() => {
+                  alert('답글이 삭제되었습니다.');
+                  window.location.reload(); // 페이지 새로고침
+                })
+                .catch((err) => {
+                  console.error('답글 삭제 실패:', err);
+                  alert('답글 삭제에 실패했습니다.');
+                });
+      }
+    }
+  });
+
+
+</script>
+{% endblock %}

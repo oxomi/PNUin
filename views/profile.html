@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="timeline">
+  <div class="questions half">
+    <h2>질문한 글</h2>
+    {% if questions and questions|length > 0 %}
+    <ul>
+      {% for question in questions %}
+      <li>{{ question }}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <div>질문이 없습니다.</div>
+    {% endif %}
+  </div>
+  <div class="answers half">
+    <h2>답변한 글</h2>
+    {% if answers and answers|length > 0 %}
+    <ul>
+      {% for answer in answers %}
+      <li>{{ answer }}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <div>답변이 없습니다.</div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

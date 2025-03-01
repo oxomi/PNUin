@@ -1,0 +1,312 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; height: 100%; }
+
+/* 배너 스타일 */
+.banner {
+  width: 100%; /* 화면 전체 너비 */
+  height: 80px; /* 배너 높이 */
+  background-color: #2DB400; /* 원하는 배경색 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  z-index: 1000; /* 배너가 다른 요소 위에 보이도록 설정 */
+  margin: 0 auto; /* 배너를 중앙 정렬 */
+}
+
+@media screen and (min-width: 800px) {
+  .banner {
+    width: 800px; /* 화면 너비가 800px 이상일 때 배너 너비 800px로 설정 */
+    margin: 0 auto; /* 배너를 중앙 정렬 */
+  }
+}
+
+.logo {
+  height: 60px; /* 로고의 크기 */
+  width: auto;
+}
+
+.container {
+  width: 100%; /* 화면 전체 너비 */
+  margin: 20px auto 0;
+}
+
+@media screen and (min-width: 800px) {
+  .container {
+    width: 800px; /* 화면 너비가 800px 이상일 때 너비 800px로 설정 */
+    margin: 5px auto 0;
+  }
+}
+
+.btn, .reply-btn {
+  display: inline-block;
+  padding: 0 5px;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 4px;
+  background: white;
+  border: 1px solid silver;
+  color: #2DB400; /* 테마 색상으로 변경 */
+  height: 30px;
+  line-height: 30px;
+  vertical-align: top;
+  font-size: 12px;
+}
+
+input[type='text'], input[type='email'], input[type='password'], textarea {
+  border-radius: 4px;
+  height: 37px;
+  padding: 10px;
+  border: 1px solid silver;
+}
+
+
+.input-group { margin-bottom: 15px; }
+.input-group label { width: 25%; display: inline-block; }
+.input-group input { width: 70%; }
+.half { float: left; width: 50%; margin: 10px 0; }
+#join { float: left; margin-right: 10px}
+
+.profile-wrap {
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  margin: 10px 0;
+}
+
+@media screen and (min-width: 800px) {
+  .profile-wrap { width: 290px; margin-bottom: 0; }
+}
+
+.profile {
+  text-align: left;
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: 1px solid silver;
+  background: #2DB400; /* 테마 색상으로 변경 */
+}
+
+.user-name { font-weight: bold; font-size: 18px; }
+.count { font-weight: bold; color: #2DB400; font-size: 18px; }
+
+.timeline {
+  margin-top: 10px;
+  width: 100%;
+  display: inline-block;
+  border-radius: 4px;
+  vertical-align: top;
+}
+
+@media screen and (min-width: 800px) { .timeline { width: 500px; } }
+#twit-form {
+  border-bottom: 1px solid silver;
+  padding: 10px;
+  background: #2DB400; /* 테마 색상으로 변경 */
+  overflow: hidden;
+}
+#img-preview { max-width: 100%; }
+
+#img { display: none; }
+#twit { width: 100%; min-height: 72px; }
+#twit-btn {
+  float: right;
+}
+.twit {
+  border: 1px solid silver;
+  border-radius: 4px;
+  padding: 10px;
+  position: relative;
+  margin-bottom: 10px;
+}
+.twit-title { display: inline-block; font-weight: bold; font-size: 20px; margin-bottom: 5px}
+.twit-author { display: inline-block; font-weight: bold; margin-right: 10px;  margin-bottom: 10px; font-size: 13px;}
+.twit-content { margin-bottom: 10px; font-size: 16px;}
+.twit-follow {
+  padding: 1px 5px;
+  background: #fff;
+  border: 1px solid silver;
+  border-radius: 5px;
+  color: #2DB400; /* 테마 색상으로 변경 */
+  font-size: 12px;
+  cursor: pointer;
+  float: right;
+}
+.twit-img { text-align: center; }
+.twit-img img { max-width: 75%; }
+.like-num { font-size: 12px}
+
+/* 게시글 상세 페이지 */
+/* 게시글 부분 스타일 */
+
+.post-container {
+  border: 1px solid silver;
+  border-radius: 4px;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  background: #f9f9f9;
+}
+
+.post-detail {
+  border: 1px solid silver;
+  border-radius: 4px;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  background: #f9f9f9;
+}
+
+.post-detail h2 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.post-detail p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.post-detail .post-img img {
+  max-width: 100%;
+  height: auto;
+}
+
+.post-header {
+  display: flex; /* 제목과 삭제 버튼을 가로로 정렬 */
+  justify-content: space-between; /* 제목은 왼쪽, 삭제 버튼은 오른쪽 */
+  align-items: center; /* 세로 중앙 정렬 */
+
+}
+
+
+/* 답글 부분 스타일 */
+.reply-form {
+  display: flex;
+  align-items: flex-start; /* 세로 정렬을 위로 맞추기 */
+  margin-top: 20px;
+}
+
+.reply-input {
+  flex-grow: 1;  /* 텍스트 영역이 가용 공간을 채우도록 */
+  margin-right: 10px;  /* 버튼과 텍스트 영역 사이의 간격 */
+}
+
+.reply-form textarea {
+  width: 100%;
+  height: 80px;
+  border: 1px solid silver;
+  border-radius: 4px;
+  padding: 10px;
+  resize: vertical;
+}
+
+.reply-btn:hover {
+  background-color: #0056b3;
+}
+
+.replies {
+  margin-top: 20px;
+}
+
+.replies .reply {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-left: 3px solid #00ff40;
+  background-color: #f1f1f1;
+}
+
+.replies .reply p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+/* 답글 텍스트 */
+.reply-content {
+  font-size: 14px;
+  margin: 0; /* 여백 제거 */
+  padding-right: 70px; /* 버튼 위치를 고려한 여유 공간 추가 */
+}
+
+#remove-btn, .remove-reply{
+  display: inline-block;
+  padding: 1px 5px;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 4px;
+  background: white;
+  border: 1px solid crimson;
+  color: crimson; /* 테마 색상으로 변경 */
+  height: 30px;
+  line-height: 30px;
+  vertical-align: top;
+  font-size: 12px;
+  float:right;
+}
+
+
+.error-message { color: red; font-weight: bold; }
+#search-form { text-align: right; margin-top: 10px; margin-bottom: 10px;}
+#join-form { padding: 10px; text-align: center; }
+
+
+/* footer 스타일 */
+footer {
+  display: flex; /* 플렉스 박스를 사용 */
+  justify-content: center; /* 좌우 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 (기본값) */
+  text-align: center; /* 텍스트를 중앙 정렬 */
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  background-color: #f1f1f1;
+  padding: 10px 0;
+  font-size: 14px;
+  margin: 20px auto 0;
+}
+
+@media screen and (min-width: 800px) {
+  footer {
+    width: 800px; /* 화면 너비가 800px 이상일 때 배너 너비 800px로 설정 */
+    margin: 20px auto 0;
+  }
+}
+
+
+.half {
+  margin-bottom: 20px;
+}
+
+
+/* 다크모드 스타일 */
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.banner.dark-mode {
+  background-color: #333333;
+}
+
+.profile.dark-mode, .timeline.dark-mode {
+  background-color: #1e1e1e;
+  border-color: #444444;
+}
+
+.twit.dark-mode {
+  background-color: #222222;
+  border-color: #444444;
+}
+
+.btn.dark-mode, .reply-btn.dark-mode {
+  background-color: #444444;
+  color: #ffffff;
+  border-color: #666666;
+}
+
+
+
+
+
